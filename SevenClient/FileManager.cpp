@@ -23,5 +23,10 @@ CFileManager::~CFileManager()
 }
 void CFileManager::OnReceive(LPBYTE lpBuffer, UINT nSize)
 {
-	
+	if (nSize == 1 && lpBuffer[0] == BASE_TOKEN_NEXT)
+	{
+		NotifyDialogIsOpen();
+		return;
+	}
+
 }
