@@ -6,10 +6,15 @@ typedef struct _DRIVE_LIST
 	wchar_t		DriveString[256];
 
 }DRIVE_LIST;
-typedef struct _FILE_DAtA
+typedef struct _FILE_DATA
 {
 	BYTE		bToken;
-	LPCTSTR		pData;
+	BYTE		pData[8196];
+	_FILE_DATA()
+	{
+		bToken = NULL;
+		memset(pData,0,8196);
+	}
 }FILE_DATA;
 class CFileManager : public CManager
 {
